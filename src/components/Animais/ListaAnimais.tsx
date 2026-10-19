@@ -19,12 +19,14 @@ export default function ListaAnimais() {
   const [animalSelecionado, setAnimalSelecionado] = useState<Animal | null>(null);
 
 
-  const [animais, setAnimais] = useState<Animal[]>([]);
+  //const [animais, setAnimais] = useState<Animal[]>([]);
+  const [animais, setAnimais] = useState([]);
 
 
 
 
-  // ======================= Mudança 
+  // ======== *(PROFERSSOR) ======================== 
+
   // 1º Passo 
   const [qtd, setQtd] = useState(0);
   const servidor: String = "http://localhost:3010";
@@ -42,15 +44,18 @@ export default function ListaAnimais() {
     }
 
   }
-
-  //=======================CARREGAR ANIMAIS 
+//===========================================
+  //====* (PROFESSOR ) CARREGAR ANIMAIS 
  const servidorImg:string  ="http://localhost:3010";
   async function carregarAn() {
     try {
       const url: string = servidor + "/animais";
       await fetch(url)
         .then((resp) => { return resp.json() })
-        .then((dado) => { setAnimais(dado); })
+        .then((dado) => { setAnimais(dado); 
+
+          console.log("Animais recebidos:"+ JSON.stringify(dado));
+        })
          
 
     } catch (error) {
@@ -60,7 +65,7 @@ export default function ListaAnimais() {
     }
   }
 
-
+//===========================================
   useEffect(() => {
     qtdAnimal();
     carregarAn();
@@ -392,9 +397,10 @@ export default function ListaAnimais() {
             {animais.map(animal => (
           
               <tr key={animal.id_animal}>
+               
                 <td>
                   <div className="animal-identificacao">
-                       
+                      
                     {animal.url_foto ? (                     
                       
                       <img
@@ -411,7 +417,7 @@ export default function ListaAnimais() {
                       </div>
                     )}
 
-                    <strong>{animal.nome}</strong>
+                    <strong>{  animal.nome}</strong>
                   </div>
                 </td>
 
@@ -471,6 +477,9 @@ export default function ListaAnimais() {
           </tbody>
         </table>
       </div>
+
+
+
 
       {animalSelecionado && (
         <div

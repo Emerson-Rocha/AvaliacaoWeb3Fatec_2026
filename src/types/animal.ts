@@ -12,7 +12,6 @@ export type StatusAnimal =
 
 export interface Animal {
   id: number;
-
   nome: string;
   rg: string;
   tipo: TipoAnimal;

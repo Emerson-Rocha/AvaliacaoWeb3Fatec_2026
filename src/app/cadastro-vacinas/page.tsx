@@ -13,12 +13,6 @@ import {
 import { describe } from "node:test";
 
 
-
-
-
-
-
-
 const vacinaSchema = Yup.object({
   nomeVacina: Yup.string()
     .required("Informe o nome da vacina"),
@@ -108,28 +102,6 @@ export default function CadastroVacinaPage() {
 
   const modoEdicao = vacinaId !== null;
 
-  //===== Mudanças
-  const url: string = "http://localhost:3010";
-
-  //==== API POST VACINA
-  async function addVacina(url: string) {
-    try {
-      await fetch(url + "/addVacina")
-        .then((resp) => resp.json())
-        .then((data) => {
-          if (data.ms) {
-            alert('Cadastro com Sucesso!');
-          }
-        }
-        ).catch(
-          (e) => { alert(`erro: ${e}`) }
-        )
-    } catch (error) {
-
-    }
-
-
-  }
 
   //==========================================================
 
@@ -239,17 +211,7 @@ export default function CadastroVacinaPage() {
             async (values, { resetForm }) => {
               try {
 
-                // CRIAR FORMDATA
-                // ==========================================
-                const formData = new FormData();
-                // PEGAR OS NAME DO FORMULARIO
-
-                formData.append("nome", values.nomeVacina);
-                formData.append("tipo", values.tipoVacina);
-                formData.append("especie", values.especie);
-                formData.append("fabricante", values.fabricante);
-                formData.append("descricao", values.descricao);
-
+             
 
                 const body = {
                   nome: values.nomeVacina,
